@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Minecraft';
+  src: url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/files/minecraft.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-mc: 'Minecraft', monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--theme-bg, #0a0a1a);
+    color: var(--theme-text, #e2e8f0);
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+  }
+
+  .mc-slot {
+    background-color: var(--theme-slot-bg);
+    border: 2px solid var(--theme-border-outer);
+    box-shadow: inset 2px 2px 0px 0px var(--theme-bevel-light), inset -2px -2px 0px 0px var(--theme-bevel-dark);
+    transition: all 0.3s ease;
+  }
+
+  .mc-panel {
+    background-color: var(--theme-panel-bg-solid);
+    border: 2px solid var(--theme-border-outer);
+    box-shadow: inset 2px 2px 0px 0px var(--theme-bevel-light), inset -2px -2px 0px 0px var(--theme-bevel-dark);
+    transition: all 0.3s ease;
+  }
+
+  .mc-button {
+    background-color: var(--theme-button-bg);
+    border: 2px solid var(--theme-border-outer);
+    box-shadow: inset 2px 2px 0px 0px var(--theme-bevel-light), inset -2px -2px 0px 0px var(--theme-bevel-dark);
+    color: var(--theme-text);
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+  }
+  
+  .mc-button:hover:not(:disabled) {
+    background-color: var(--theme-button-hover-bg);
+    transform: scale(1.02);
+  }
+
+  .mc-button:active:not(:disabled) {
+    box-shadow: inset 2px 2px 0px 0px var(--theme-bevel-dark), inset -2px -2px 0px 0px var(--theme-bevel-light);
+    transform: scale(0.98);
+  }
+
+  .mc-button-active {
+    background-color: var(--theme-accent);
+    border: 2px solid var(--theme-border-outer);
+    box-shadow: inset 2px 2px 0px 0px var(--theme-accent-light), inset -2px -2px 0px 0px var(--theme-accent-dark);
+    color: #ffffff;
+    text-shadow: 2px 2px 0px var(--theme-accent-dark);
+    transition: all 0.15s ease-in-out;
+  }
+  
+  .mc-button-active:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+  }
+
+  .theme-dark {
+    --theme-bg: #0a0a1a;
+    --theme-text: #e2e8f0;
+    --theme-panel-bg: rgba(15, 23, 42, 0.7); 
+    --theme-panel-bg-solid: #1e293b;
+    --theme-panel-border: #1e293b; 
+    --theme-accent: #a855f7; 
+    --theme-accent-light: #d8b4fe;
+    --theme-accent-dark: #6b21a8;
+    --theme-accent-bg: rgba(88, 28, 135, 0.4);
+    --theme-button-bg: #334155; 
+    --theme-button-border: #000000; 
+    --theme-button-hover-bg: #475569;
+    --theme-header-border: rgba(88, 28, 135, 0.5); 
+    --theme-result-bg: rgba(15, 23, 42, 0.9);
+    --theme-result-border: rgba(168, 85, 247, 0.3);
+    --theme-preview-bg: rgba(30, 41, 59, 1);
+    
+    --theme-slot-bg: #8b8b8b;
+    --theme-border-outer: #000000;
+    --theme-bevel-light: #64748b;
+    --theme-bevel-dark: #0f172a;
+  }
+
+  .theme-light {
+    --theme-bg: #f8fafc;
+    --theme-text: #0f172a;
+    --theme-panel-bg: rgba(255, 255, 255, 0.9);
+    --theme-panel-bg-solid: #f1f5f9;
+    --theme-panel-border: #cbd5e1;
+    --theme-accent: #7e22ce;
+    --theme-accent-light: #c084fc;
+    --theme-accent-dark: #581c87;
+    --theme-accent-bg: rgba(216, 180, 254, 0.4);
+    --theme-button-bg: #f8fafc;
+    --theme-button-border: #000000;
+    --theme-button-hover-bg: #e2e8f0;
+    --theme-header-border: rgba(147, 51, 234, 0.2);
+    --theme-result-bg: rgba(255, 255, 255, 0.95);
+    --theme-result-border: #a855f7;
+    --theme-preview-bg: rgba(226, 232, 240, 1);
+    
+    --theme-slot-bg: #c6c6c6;
+    --theme-border-outer: #000000;
+    --theme-bevel-light: #ffffff;
+    --theme-bevel-dark: #94a3b8;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #1e1e3c;
+}
+::-webkit-scrollbar-thumb {
+  background: #4b2a85;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6a3bb5;
+}
+
+/* Enchantment glint animation */
+@keyframes glint {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+.animate-glint {
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(168, 85, 247, 0.4) 50%,
+    transparent 75%
+  );
+  background-size: 200% auto;
+  animation: glint 3s linear infinite;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
