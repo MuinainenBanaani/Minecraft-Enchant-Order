@@ -20,6 +20,7 @@ export enum ItemCategory {
   MACE = "MACE",
   ELYTRA = "ELYTRA",
   BOOK = "BOOK",
+  SPEAR = "SPEAR",
 }
 
 export interface Enchantment {

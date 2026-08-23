@@ -353,55 +353,44 @@ export function optimizeEnchantmentOrder(
 
   if (isItemBase) {
     baseNode = makeItem();
-    // Remove the most-expensive book from the list
-    remainingBooks = rawBooks.filter((_, i) => i !== mostExpIdx);
-    const firstBook = rawBooks[mostExpIdx];
 
-    let mergedBase: WorkNode;
-    try {
-      mergedBase = mergeNodes(baseNode, firstBook);
-      mergedBase.c.L = { I: "item", l: 0, w: 0 };
-    } catch {
-      // Even one book is too expensive — still report it
-      return {
-        steps: [{ leftLabel: itemLabel, rightLabel: enchIdToName[firstBook.e[0]], mergeCost: 40, xpCost: 0, resultPriorWork: 0 }],
-        totalLevels: 40,
-        totalXP: 0,
-        isValid: false,
-        tooExpensive: true,
-      };
-    }
-
-    if (remainingBooks.length === 0) {
-      // Only one book — return immediately
-      const steps = extractSteps(mergedBase.c, enchIdToName, itemLabel);
-      if (wantRename && steps.length > 0) {
-        steps[0].mergeCost += 1;
-        steps[0].xpCost = xpFromLevels(steps[0].mergeCost);
-        steps[0].isRename = true;
-      }
-      const totalLevels = steps.reduce((s, st) => s + st.mergeCost, 0);
-      const totalXP = steps.reduce((s, st) => s + st.xpCost, 0);
-      return {
-        steps,
-        totalLevels,
-        totalXP,
-        isValid: !steps.some(s => s.mergeCost > MAXIMUM_MERGE_LEVELS),
-        tooExpensive: steps.some(s => s.mergeCost > MAXIMUM_MERGE_LEVELS),
-      };
-    }
-
-    // Run the combinatorial search over [remaining books..., mergedBase]
-    const allNodes = [...remainingBooks, mergedBase];
-    const cheapestDict = cheapestFromList(allNodes);
-
+    // Try every book as the "first" merge with the item, then run the
+    // combinatorial search over the remaining books + that merged base.
+    // Pick whichever first-book choice yields the lowest total XP.
     let bestNode: WorkNode | null = null;
     let bestXP = Infinity;
-    for (const w in cheapestDict) {
-      const node = cheapestDict[w];
-      if (node && node.x < bestXP) {
-        bestXP = node.x;
-        bestNode = node;
+
+    for (let firstIdx = 0; firstIdx < rawBooks.length; firstIdx++) {
+      const firstBook = rawBooks[firstIdx];
+      const remaining = rawBooks.filter((_, i) => i !== firstIdx);
+
+      let mergedBase: WorkNode;
+      try {
+        mergedBase = mergeNodes(baseNode, firstBook);
+        mergedBase.c.L = { I: "item", l: 0, w: 0 };
+      } catch {
+        continue; // this book alone is too expensive, skip
+      }
+
+      if (remaining.length === 0) {
+        // Only one book total
+        if (mergedBase.x < bestXP) {
+          bestXP = mergedBase.x;
+          bestNode = mergedBase;
+        }
+        continue;
+      }
+
+      // Combinatorial search over remaining books + merged base
+      const allNodes = [...remaining, mergedBase];
+      const cheapestDict = cheapestFromList(allNodes);
+
+      for (const w in cheapestDict) {
+        const node = cheapestDict[w];
+        if (node && node.x < bestXP) {
+          bestXP = node.x;
+          bestNode = node;
+        }
       }
     }
 

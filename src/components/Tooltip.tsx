@@ -23,6 +23,7 @@ export function Tooltip({ item }: TooltipProps) {
       case ItemCategory.MACE: return "Mace";
       case ItemCategory.ELYTRA: return "Elytra";
       case ItemCategory.BOOK: return "Enchanted Book";
+      case ItemCategory.SPEAR: return "Spear";
       default: return "Item";
     }
   };

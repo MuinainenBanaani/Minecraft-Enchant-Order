@@ -23,6 +23,7 @@ const ITEM_CATEGORIES = [
   { id: ItemCategory.ELYTRA, label: "Elytra" },
   { id: ItemCategory.FISHING_ROD, label: "Fishing Rod" },
   { id: ItemCategory.BOOK, label: "Book" },
+  { id: ItemCategory.SPEAR, label: "Spear" },
 ];
 
 function FancyEnchantmentRow({ 
@@ -273,7 +274,8 @@ export default function Home() {
     const newBooks: EnchantmentInstance[] = [];
     const usedIds = new Set<string>();
     
-    const allValid = ENCHANTMENTS.filter((e) => e.categories.includes(selectedCategory)).sort((a, b) => {
+    const CURSE_IDS = ['vanishing_curse', 'binding_curse'];
+    const allValid = ENCHANTMENTS.filter((e) => e.categories.includes(selectedCategory) && !CURSE_IDS.includes(e.id)).sort((a, b) => {
       const getPriority = (id: string) => {
         if (id === 'protection') return 100;
         if (id === 'sharpness') return 100;

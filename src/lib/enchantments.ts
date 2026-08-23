@@ -17,6 +17,7 @@ const ALL_CATEGORIES = [
   ItemCategory.MACE,
   ItemCategory.ELYTRA,
   ItemCategory.BOOK,
+  ItemCategory.SPEAR,
 ];
 
 const ARMOR = [
@@ -159,7 +160,7 @@ export const ENCHANTMENTS: Enchantment[] = [
     maxLevel: 5,
     itemMultiplier: 1,
     bookMultiplier: 1,
-    categories: [ItemCategory.SWORD, ItemCategory.AXE, ItemCategory.BOOK],
+    categories: [ItemCategory.SWORD, ItemCategory.AXE, ItemCategory.SPEAR, ItemCategory.BOOK],
     conflicts: ["smite", "bane_of_arthropods", "density", "breach"],
   },
   {
@@ -168,7 +169,7 @@ export const ENCHANTMENTS: Enchantment[] = [
     maxLevel: 5,
     itemMultiplier: 2,
     bookMultiplier: 1,
-    categories: [ItemCategory.SWORD, ItemCategory.AXE, ItemCategory.MACE, ItemCategory.BOOK],
+    categories: [ItemCategory.SWORD, ItemCategory.AXE, ItemCategory.MACE, ItemCategory.SPEAR, ItemCategory.BOOK],
     conflicts: ["sharpness", "bane_of_arthropods", "density", "breach"],
   },
   {
@@ -177,7 +178,7 @@ export const ENCHANTMENTS: Enchantment[] = [
     maxLevel: 5,
     itemMultiplier: 2,
     bookMultiplier: 1,
-    categories: [ItemCategory.SWORD, ItemCategory.AXE, ItemCategory.MACE, ItemCategory.BOOK],
+    categories: [ItemCategory.SWORD, ItemCategory.AXE, ItemCategory.MACE, ItemCategory.SPEAR, ItemCategory.BOOK],
     conflicts: ["sharpness", "smite", "density", "breach"],
   },
   {
@@ -186,7 +187,7 @@ export const ENCHANTMENTS: Enchantment[] = [
     maxLevel: 2,
     itemMultiplier: 2,
     bookMultiplier: 1,
-    categories: [ItemCategory.SWORD, ItemCategory.BOOK],
+    categories: [ItemCategory.SWORD, ItemCategory.SPEAR, ItemCategory.BOOK],
     conflicts: [],
   },
   {
@@ -195,7 +196,7 @@ export const ENCHANTMENTS: Enchantment[] = [
     maxLevel: 2,
     itemMultiplier: 4,
     bookMultiplier: 2,
-    categories: [ItemCategory.SWORD, ItemCategory.MACE, ItemCategory.BOOK],
+    categories: [ItemCategory.SWORD, ItemCategory.MACE, ItemCategory.SPEAR, ItemCategory.BOOK],
     conflicts: [],
   },
   {
@@ -204,7 +205,7 @@ export const ENCHANTMENTS: Enchantment[] = [
     maxLevel: 3,
     itemMultiplier: 4,
     bookMultiplier: 2,
-    categories: [ItemCategory.SWORD, ItemCategory.BOOK],
+    categories: [ItemCategory.SWORD, ItemCategory.SPEAR, ItemCategory.BOOK],
     conflicts: [],
   },
   {
@@ -385,6 +386,33 @@ export const ENCHANTMENTS: Enchantment[] = [
     itemMultiplier: 4,
     bookMultiplier: 2,
     categories: [ItemCategory.MACE, ItemCategory.BOOK],
+    conflicts: [],
+  },
+  {
+    id: "lunge",
+    name: "Lunge",
+    maxLevel: 3,
+    itemMultiplier: 2,
+    bookMultiplier: 1,
+    categories: [ItemCategory.SPEAR, ItemCategory.BOOK],
+    conflicts: [],
+  },
+  {
+    id: "vanishing_curse",
+    name: "Curse of Vanishing",
+    maxLevel: 1,
+    itemMultiplier: 8,
+    bookMultiplier: 4,
+    categories: ALL_CATEGORIES,
+    conflicts: [],
+  },
+  {
+    id: "binding_curse",
+    name: "Curse of Binding",
+    maxLevel: 1,
+    itemMultiplier: 8,
+    bookMultiplier: 4,
+    categories: [...ARMOR, ItemCategory.ELYTRA, ItemCategory.BOOK],
     conflicts: [],
   }
 ];
