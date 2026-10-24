@@ -9,142 +9,125 @@
 }
 
 @theme {
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mc: 'Minecraft', monospace;
 }
 
-@layer base {
-  body {
-    background-color: var(--theme-bg, #0a0a1a);
-    color: var(--theme-text, #e2e8f0);
-    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
-  }
+:root {
+  --app-bg: #0d1527;
+  --app-card-bg: #141e33;
+  --app-card-hover: #1b2844;
+  --app-card-border: #1e2e4a;
+  --app-card-border-hover: #2e4368;
+  --app-accent: #3b82f6;
+  --app-accent-glow: rgba(59, 130, 246, 0.25);
+  --app-text: #f1f5f9;
+  --app-text-muted: #94a3b8;
+  --app-text-subtle: #64748b;
+}
 
-  .mc-slot {
-    background-color: var(--theme-slot-bg);
-    border: 2px solid var(--theme-border-outer);
-    box-shadow: inset 2px 2px 0px 0px var(--theme-bevel-light), inset -2px -2px 0px 0px var(--theme-bevel-dark);
-    transition: all 0.3s ease;
-  }
+.theme-light {
+  --app-bg: #f8fafc;
+  --app-card-bg: #ffffff;
+  --app-card-hover: #f1f5f9;
+  --app-card-border: #e2e8f0;
+  --app-card-border-hover: #cbd5e1;
+  --app-accent: #2563eb;
+  --app-accent-glow: rgba(37, 99, 235, 0.15);
+  --app-text: #0f172a;
+  --app-text-muted: #475569;
+  --app-text-subtle: #94a3b8;
+}
 
-  .mc-panel {
-    background-color: var(--theme-panel-bg-solid);
-    border: 2px solid var(--theme-border-outer);
-    box-shadow: inset 2px 2px 0px 0px var(--theme-bevel-light), inset -2px -2px 0px 0px var(--theme-bevel-dark);
-    transition: all 0.3s ease;
-  }
+body {
+  background-color: var(--app-bg);
+  color: var(--app-text);
+  font-family: var(--font-sans);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
 
-  .mc-button {
-    background-color: var(--theme-button-bg);
-    border: 2px solid var(--theme-border-outer);
-    box-shadow: inset 2px 2px 0px 0px var(--theme-bevel-light), inset -2px -2px 0px 0px var(--theme-bevel-dark);
-    color: var(--theme-text);
-    cursor: pointer;
-    transition: all 0.15s ease-in-out;
-  }
-  
-  .mc-button:hover:not(:disabled) {
-    background-color: var(--theme-button-hover-bg);
-    transform: scale(1.02);
-  }
+/* Custom Checkbox Component */
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  user-select: none;
+}
 
-  .mc-button:active:not(:disabled) {
-    box-shadow: inset 2px 2px 0px 0px var(--theme-bevel-dark), inset -2px -2px 0px 0px var(--theme-bevel-light);
-    transform: scale(0.98);
-  }
+.check input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
 
-  .mc-button-active {
-    background-color: var(--theme-accent);
-    border: 2px solid var(--theme-border-outer);
-    box-shadow: inset 2px 2px 0px 0px var(--theme-accent-light), inset -2px -2px 0px 0px var(--theme-accent-dark);
-    color: #ffffff;
-    text-shadow: 2px 2px 0px var(--theme-accent-dark);
-    transition: all 0.15s ease-in-out;
-  }
-  
-  .mc-button-active:hover {
-    transform: scale(1.02);
-    filter: brightness(1.1);
-  }
+.check .box {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.375rem;
+  border: 1.5px solid #2e4368;
+  background-color: #0d1527;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease-in-out;
+  flex-shrink: 0;
+}
 
-  .theme-dark {
-    --theme-bg: #0a0a1a;
-    --theme-text: #e2e8f0;
-    --theme-panel-bg: rgba(15, 23, 42, 0.7); 
-    --theme-panel-bg-solid: #1e293b;
-    --theme-panel-border: #1e293b; 
-    --theme-accent: #a855f7; 
-    --theme-accent-light: #d8b4fe;
-    --theme-accent-dark: #6b21a8;
-    --theme-accent-bg: rgba(88, 28, 135, 0.4);
-    --theme-button-bg: #334155; 
-    --theme-button-border: #000000; 
-    --theme-button-hover-bg: #475569;
-    --theme-header-border: rgba(88, 28, 135, 0.5); 
-    --theme-result-bg: rgba(15, 23, 42, 0.9);
-    --theme-result-border: rgba(168, 85, 247, 0.3);
-    --theme-preview-bg: rgba(30, 41, 59, 1);
-    
-    --theme-slot-bg: #8b8b8b;
-    --theme-border-outer: #000000;
-    --theme-bevel-light: #64748b;
-    --theme-bevel-dark: #0f172a;
-  }
+.check:hover .box {
+  border-color: #3b82f6;
+  background-color: #141e33;
+}
 
-  .theme-light {
-    --theme-bg: #f8fafc;
-    --theme-text: #0f172a;
-    --theme-panel-bg: rgba(255, 255, 255, 0.9);
-    --theme-panel-bg-solid: #f1f5f9;
-    --theme-panel-border: #cbd5e1;
-    --theme-accent: #7e22ce;
-    --theme-accent-light: #c084fc;
-    --theme-accent-dark: #581c87;
-    --theme-accent-bg: rgba(216, 180, 254, 0.4);
-    --theme-button-bg: #f8fafc;
-    --theme-button-border: #000000;
-    --theme-button-hover-bg: #e2e8f0;
-    --theme-header-border: rgba(147, 51, 234, 0.2);
-    --theme-result-bg: rgba(255, 255, 255, 0.95);
-    --theme-result-border: #a855f7;
-    --theme-preview-bg: rgba(226, 232, 240, 1);
-    
-    --theme-slot-bg: #c6c6c6;
-    --theme-border-outer: #000000;
-    --theme-bevel-light: #ffffff;
-    --theme-bevel-dark: #94a3b8;
-  }
+.check input:checked + .box {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+.check .box svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: scale(0);
+  transition: transform 0.15s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+}
+
+.check input:checked + .box svg {
+  transform: scale(1);
+}
+
+.check .label {
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.check:hover .label {
+  color: #f1f5f9;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #1e1e3c;
+  background: #090e1a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #4b2a85;
-  border-radius: 5px;
+  background: #233554;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #6a3bb5;
-}
-
-/* Enchantment glint animation */
-@keyframes glint {
-  0% { background-position: 200% center; }
-  100% { background-position: -200% center; }
-}
-.animate-glint {
-  background: linear-gradient(
-    110deg,
-    transparent 25%,
-    rgba(168, 85, 247, 0.4) 50%,
-    transparent 75%
-  );
-  background-size: 200% auto;
-  animation: glint 3s linear infinite;
+  background: #3b82f6;
 }
 
 .pixelated {

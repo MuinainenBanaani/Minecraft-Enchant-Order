@@ -80,7 +80,7 @@ export function Tooltip({ item }: TooltipProps) {
   const imageFileName = item.category.toLowerCase() + ".png";
 
   return (
-    <div className="bg-[#110211] border-2 border-[#2b0563] p-2 shadow-[0_0_0_2px_#110211] font-mono text-base inline-block rounded max-w-lg w-full font-mc z-50">
+    <div className="bg-[#100110] border-2 border-[#1e0146] p-2 shadow-[0_0_0_2px_#110211] font-mono text-base inline-block rounded max-w-lg w-full font-mc z-50">
       <div className="flex items-start gap-4 p-2">
         {/* Left: Square Image Box */}
         <div className="mc-slot flex-shrink-0 w-20 h-20 flex items-center justify-center">
